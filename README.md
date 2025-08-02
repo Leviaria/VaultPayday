@@ -6,10 +6,10 @@
 
 **An SA:MP-inspired payday system for Minecraft servers**
 
-[![Release](https://img.shields.io/github/v/release/Leviaria/VaultPayday?style=for-the-badge)](https://github.com/Leviaria/VaultPayday/releases)
-[![Downloads](https://img.shields.io/github/downloads/Leviaria/VaultPayday/total?style=for-the-badge)](https://github.com/Leviaria/VaultPayday/releases)
-[![Stars](https://img.shields.io/github/stars/Leviaria/VaultPayday?style=for-the-badge)](https://github.com/Leviaria/VaultPayday/stargazers)
-[![License](https://img.shields.io/github/license/Leviaria/VaultPayday?style=for-the-badge)](https://github.com/Leviaria/VaultPayday/blob/main/LICENSE)
+[![Release](https://img.shields.io/github/v/release/Leviaria/VaultPayday?style=for-the-badge&cacheSeconds=30)](https://github.com/Leviaria/VaultPayday/releases)
+[![Downloads](https://img.shields.io/github/downloads/Leviaria/VaultPayday/total?style=for-the-badge&cacheSeconds=30)](https://github.com/Leviaria/VaultPayday/releases)
+[![Stars](https://img.shields.io/github/stars/Leviaria/VaultPayday?style=for-the-badge&cacheSeconds=30)](https://github.com/Leviaria/VaultPayday/stargazers)
+[![License](https://img.shields.io/github/license/Leviaria/VaultPayday?style=for-the-badge&cacheSeconds=30)](https://github.com/Leviaria/VaultPayday/blob/main/LICENSE)
 
 [![Spigot](https://img.shields.io/badge/Spigot-1.20+-orange?style=for-the-badge&logo=minecraft)](https://www.spigotmc.org/)
 [![Paper](https://img.shields.io/badge/Paper-1.20+-blue?style=for-the-badge&logo=minecraft)](https://papermc.io/)
