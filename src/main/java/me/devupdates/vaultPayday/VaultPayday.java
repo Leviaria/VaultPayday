@@ -8,7 +8,7 @@ import me.devupdates.vaultPayday.integration.JobsIntegrationManager;
 import me.devupdates.vaultPayday.integration.PlaceholderAPIIntegration;
 import me.devupdates.vaultPayday.manager.ConfigManager;
 import me.devupdates.vaultPayday.manager.PaydayManager;
-// import me.devupdates.vaultPayday.metrics.MetricsManager; // Temporarily disabled
+import me.devupdates.vaultPayday.metrics.MetricsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +24,7 @@ public final class VaultPayday extends JavaPlugin implements Listener {
     private PaydayManager paydayManager;
     private JobsIntegrationManager jobsIntegrationManager;
     private PlaceholderAPIIntegration placeholderAPIIntegration;
-    // private MetricsManager metricsManager; // Temporarily disabled
+    private MetricsManager metricsManager;
     
     @Override
     public void onEnable() {
@@ -54,8 +54,7 @@ public final class VaultPayday extends JavaPlugin implements Listener {
         // Register commands
         registerCommands();
         
-        // Initialize metrics (bStats) - Temporarily disabled due to dependency issues
-        /*
+        // Initialize metrics (bStats)
         try {
             metricsManager = new MetricsManager(this, configManager, paydayManager);
             metricsManager.initialize();
@@ -65,8 +64,6 @@ public final class VaultPayday extends JavaPlugin implements Listener {
                 e.printStackTrace();
             }
         }
-        */
-        getLogger().info("bStats metrics temporarily disabled - will be re-enabled in next update");
         
         getLogger().info("VaultPayday enabled successfully!");
     }
@@ -77,11 +74,9 @@ public final class VaultPayday extends JavaPlugin implements Listener {
         getLogger().info("Shutting down VaultPayday...");
         
         // Shutdown managers in reverse order
-        /*
         if (metricsManager != null) {
             metricsManager.shutdown();
         }
-        */
         
         if (placeholderAPIIntegration != null) {
             placeholderAPIIntegration.unregister();
@@ -211,5 +206,5 @@ public final class VaultPayday extends JavaPlugin implements Listener {
     public PaydayManager getPaydayManager() { return paydayManager; }
     public JobsIntegrationManager getJobsIntegrationManager() { return jobsIntegrationManager; }
     public PlaceholderAPIIntegration getPlaceholderAPIIntegration() { return placeholderAPIIntegration; }
-    // public MetricsManager getMetricsManager() { return metricsManager; } // Temporarily disabled
+    public MetricsManager getMetricsManager() { return metricsManager; }
 }

@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    id 'com.gradleup.shadow' version '8.3.8'
 }
 
 group = 'me.devupdates'
@@ -66,29 +67,32 @@ dependencies {
     // SQLite database driver
     implementation("org.xerial:sqlite-jdbc:3.45.0.0")
     
-    // bStats metrics (temporarily disabled)
-    // implementation("org.bstats:bstats-bukkit:3.1.0")
+    // bStats metrics
+    implementation("org.bstats:bstats-bukkit:3.1.0")
 }
 
-// Shadow JAR configuration (temporarily disabled)
-/*
+// Configure shadowJar to properly include dependencies
 shadowJar {
-    // Relocate bStats to avoid conflicts
-    relocate 'org.bstats', 'me.devupdates.vaultPayday.bstats'
-    
-    // Set classifier to null to replace the default jar
+    // Set output filename
     archiveClassifier.set('')
     
-    // Only shade specific dependencies
-    dependencies {
-        include(dependency('org.bstats:bstats-bukkit'))
-        include(dependency('org.xerial:sqlite-jdbc'))
-    }
+    // Include implementation dependencies that need to be shaded
+    configurations = [project.configurations.runtimeClasspath]
+    
+    // Relocate bStats to avoid conflicts with other plugins
+    relocate 'org.bstats', 'me.devupdates.vaultPayday.libs.bstats'
+    
+    // Merge service files
+    mergeServiceFiles()
 }
 
-// Make build task depend on shadowJar
+// Make build depend on shadowJar
 build.dependsOn shadowJar
-*/
+
+// Disable regular jar to avoid confusion
+jar {
+    enabled = false
+}
 
 tasks {
     runServer {
@@ -125,3 +129,4 @@ processResources {
         expand props
     }
 }
+
