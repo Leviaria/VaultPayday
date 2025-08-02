@@ -9,6 +9,7 @@ import me.devupdates.vaultPayday.integration.PlaceholderAPIIntegration;
 import me.devupdates.vaultPayday.manager.ConfigManager;
 import me.devupdates.vaultPayday.manager.PaydayManager;
 import me.devupdates.vaultPayday.metrics.MetricsManager;
+import me.devupdates.vaultPayday.util.DependencyDownloader;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

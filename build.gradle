@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'me.devupdates'
-version = '1.0-SNAPSHOT'
+version = '2.0.1'
 
 repositories {
     mavenCentral()
@@ -64,34 +64,27 @@ dependencies {
     // PlaceholderAPI (Optional)
     compileOnly("me.clip:placeholderapi:2.11.6")
     
-    // SQLite database driver
-    implementation("org.xerial:sqlite-jdbc:3.45.0.0")
+    // SQLite database driver - Not shaded, will be downloaded at runtime
+    compileOnly("org.xerial:sqlite-jdbc:3.45.0.0")
     
     // bStats metrics
     implementation("org.bstats:bstats-bukkit:3.1.0")
 }
 
-// Configure shadowJar to properly include dependencies
-shadowJar {
-    // Set output filename
-    archiveClassifier.set('')
+// Simple shadowJar configuration that works
+tasks {
+    shadowJar {
+        archiveClassifier.set('')
+        
+        // Relocate bStats
+        relocate('org.bstats', 'me.devupdates.vaultPayday.libs.bstats')
+        
+        mergeServiceFiles()
+    }
     
-    // Include implementation dependencies that need to be shaded
-    configurations = [project.configurations.runtimeClasspath]
-    
-    // Relocate bStats to avoid conflicts with other plugins
-    relocate 'org.bstats', 'me.devupdates.vaultPayday.libs.bstats'
-    
-    // Merge service files
-    mergeServiceFiles()
-}
-
-// Make build depend on shadowJar
-build.dependsOn shadowJar
-
-// Disable regular jar to avoid confusion
-jar {
-    enabled = false
+    build {
+        dependsOn(shadowJar)
+    }
 }
 
 tasks {
