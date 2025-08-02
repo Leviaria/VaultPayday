@@ -1,0 +1,202 @@
+# VaultPayday Configuration
+# SA:MP-inspired payday system for Minecraft servers
+
+# ==========================================
+# PAYDAY SYSTEM SETTINGS
+# ==========================================
+
+# Time required for a payday payout (in minutes)
+payday_interval_minutes: 60
+
+# Notification settings
+notifications:
+  # Type of notification: chat, actionbar, title, or none
+  message_type: 'chat'
+  
+  # Show progress notifications (every X minutes)
+  show_progress: true
+  progress_interval_minutes: 10
+  
+  # Payday completion notification
+  payday_notification: true
+
+# Command settings
+commands:
+  # Enable /payday command for players
+  show_progress_command: true
+  
+  # Cooldown for /payday command (in seconds)
+  payday_command_cooldown: 30
+
+# ==========================================
+# STORAGE SETTINGS
+# ==========================================
+
+storage:
+  # Storage type: sqlite or yaml
+  type: 'sqlite'
+  
+  # SQLite database file name (in plugin folder)
+  sqlite_filename: 'payday_data.db'
+  
+  # Async save interval for YAML storage (in seconds)
+  # Only applies if storage type is 'yaml'
+  yaml_save_interval: 300
+  
+  # Auto-save on key events (logout, payday, etc.)
+  auto_save_on_events: true
+
+# ==========================================
+# PERFORMANCE SETTINGS
+# ==========================================
+
+performance:
+  # Update interval for playtime tracking (in seconds)
+  # Lower values = more accurate but higher CPU usage
+  time_update_interval: 60
+  
+  # Maximum players to process per update cycle
+  # Prevents lag spikes with many online players
+  max_players_per_cycle: 50
+  
+  # Cache settings
+  cache_cleanup_interval: 1800  # 30 minutes
+  max_cached_offline_players: 100
+
+# ==========================================
+# MULTIPLIER SYSTEM
+# ==========================================
+
+multipliers:
+  # Enable permission-based multipliers
+  enabled: true
+  
+  # Permission-based multipliers
+  permissions:
+    'vaultpayday.multiplier.vip': 1.5
+    'vaultpayday.multiplier.premium': 2.0
+    'vaultpayday.multiplier.elite': 2.5
+  
+  # Job-specific multipliers (requires JobsReborn job names)
+  jobs:
+    'Miner': 1.2
+    'Woodcutter': 1.1
+    'Farmer': 1.1
+    'Builder': 1.3
+    'Hunter': 1.4
+
+# ==========================================
+# INTEGRATION SETTINGS
+# ==========================================
+
+integrations:
+  # PlaceholderAPI integration
+  placeholderapi:
+    enabled: false
+    
+  # Jobs integration settings
+  jobs:
+    # Intercept all job payments
+    intercept_all_payments: true
+    
+    # Specific jobs to intercept (if intercept_all_payments is false)
+    specific_jobs: []
+    
+    # Minimum payment amount to intercept
+    minimum_payment: 0.01
+
+# ==========================================
+# MESSAGES
+# ==========================================
+
+messages:
+  # Prefix for all plugin messages
+  prefix: '&8[&6VaultPayday&8] &r'
+  
+  # Payday notifications
+  payday_received: '&a💰 Payday! You received &2$%amount% &afor &e%time% minutes &aof work!'
+  progress_notification: '&7📊 Payday Progress: &e%time%&7/&e%required% minutes &7| Pending: &a$%pending%'
+  
+  # Command messages
+  payday_info: |
+    &8▬▬▬▬▬▬▬▬▬▬▬▬ &6Payday Status &8▬▬▬▬▬▬▬▬▬▬▬▬
+    &7Time Played: &e%time%&7/&e%required% &7minutes &8(&a%percentage%%&8)
+    &7Pending Balance: &a$%pending%
+    &7Next Payday: &e%remaining% &7minutes
+    &7Total Paydays: &e%total_paydays%
+    &8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+  
+  # Admin command messages
+  reload_success: '&aConfiguration reloaded successfully!'
+  player_reset: '&aReset payday progress for player &e%player%&a!'
+  player_not_found: '&cPlayer not found!'
+  time_set: '&aSet playtime for &e%player% &ato &e%time% &aminutes!'
+  invalid_time: '&cInvalid time value! Please use a number between 0 and %max%.'
+  
+  # Payment interception messages
+  payment_intercepted: '&7💰 Earnings saved for payday: &a+$%amount% &7| Pending: &e$%pending% &7| Time: &e%time%&7/&e%required%min'
+  
+  # Command messages
+  commands_player_only: '&cThis command can only be used by players!'
+  command_disabled: '&cThis command is currently disabled!'
+  data_not_loaded: '&cYour payday data is not loaded yet. Please try again in a moment.'
+  payday_ready: '&a🎉 Your payday is ready! You will receive it automatically.'
+  no_pending_earnings: '&7ℹ No pending earnings yet. Start working to earn money!'
+  progress_reset_notification: '&6Your payday progress has been reset by an administrator.'
+  time_updated_notification: '&6Your playtime has been updated to &e%time% &6minutes by an administrator.'
+  player_data_not_found: '&cPlayer data not found in the system!'
+  unknown_subcommand: '&cUnknown subcommand: &e%subcommand%'
+  invalid_number: '&cPlease provide a valid number!'
+  reload_error: '&cFailed to reload configuration! Check console for errors.'
+  stats_error: '&cFailed to retrieve statistics! Please try again later.'
+  
+  # Error messages
+  no_permission: '&cYou do not have permission to use this command!'
+  command_cooldown: '&cPlease wait &e%seconds% &cseconds before using this command again!'
+  database_error: '&cDatabase error occurred! Please contact an administrator.'
+  
+  # Info messages
+  plugin_info: |
+    &8▬▬▬▬▬▬▬▬▬▬▬ &6VaultPayday Info &8▬▬▬▬▬▬▬▬▬▬▬
+    &7Version: &e%version%
+    &7Online Players: &e%online_players%
+    &7Players in System: &e%tracked_players%
+    &7Pending Payouts: &e%pending_payouts%
+    &7Total Paydays Given: &e%total_paydays%
+    &8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+
+# ==========================================
+# ADVANCED SETTINGS
+# ==========================================
+
+advanced:
+  # Debug mode (verbose logging)
+  debug: false
+  
+  # Backup settings
+  backup:
+    enabled: true
+    interval_hours: 24
+    max_backups: 7
+  
+  # AFK integration (if supported)
+  afk:
+    # Pause payday progress when AFK
+    pause_when_afk: false
+    
+    # AFK detection plugins supported: Essentials, CMI
+    detection_plugin: 'auto'
+  
+  # World-specific settings
+  worlds:
+    # Enable payday system in specific worlds only
+    whitelist_mode: false
+    whitelisted_worlds: []
+    
+    # Disable payday system in specific worlds
+    blacklisted_worlds: []
+
+# ==========================================
+# VERSION (DO NOT MODIFY)
+# ==========================================
+config_version: 1
